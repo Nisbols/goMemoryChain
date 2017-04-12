@@ -2,25 +2,18 @@
 //
 package main
 
-import "fmt"
 import "math/rand"
 import "time"
-import "os"
-import "log"
+
+import "fmt"
 
 const maxNumber = 4
 const minNumber = 1
 
 func main() {
-	ranNumber()
-	file, err := os.Create("doc")
-	if err != nil {
-		log.Fatal("Cannot create file", err)
-	}
-	defer file.Close()
-
-	fmt.Fprintf(file, "%d", ranNumber())
-	fmt.Fprintf(file, "%d", ranNumber())
+	c := make([]int, 0)
+	numberLoop(c)
+	fmt.Printf("exited loop")
 }
 
 // A random number generator with a new seed ever nano second
@@ -30,4 +23,26 @@ func ranNumber() int {
 	n := 0
 	n = rand.Intn(maxNumber-minNumber) + minNumber
 	return n
+}
+
+func numberLoop(c []int) {
+	for l := 1; l == 1; {
+		u := 0
+		n := len(c)
+		c = append(c, ranNumber())
+		//fmt.Println(n)
+		//fmt.Println(c)
+		for i := 0; i <= n; i++ {
+			fmt.Printf("%d", c[i])
+			time.Sleep(1)
+		}
+		for i := 0; (i <= n) && (l == 1); i++ {
+			fmt.Printf("\n")
+			fmt.Scanf("%d", &u)
+			if u != c[i] {
+				fmt.Printf("bad\n")
+				l = 0
+			}
+		}
+	}
 }
